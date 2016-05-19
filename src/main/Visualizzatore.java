@@ -12,7 +12,9 @@ public class Visualizzatore {
 	public final static String PUGNALE="Pugnale";
 	public final static String POZIONE="Pozione";
 	public final static String FORZIERE="Forziere";
+	public static final String ORCO = "Orco";
 	private final static String OGGETTO_TROVATO="Hai trovato l'oggetto: %s.\n";
+	private static final String ORCO_TROVATO="Hai trovato un Orco!";
 	private final static String RACCOGLIERE="Lo vuoi raccogliere?";
 	private final static String APRIRE="Lo vuoi aprire?";
 	private static final String USARE_POZIONE = "Vuoi usarla?";
@@ -23,7 +25,6 @@ public class Visualizzatore {
 	private static final String CASELLA_VUOTA_TROVATA = "La casella e' vuota.";
 	private static final String DROPPARE = "Vuoi lasciare la tua arma su questa casella?";
 	private static final String GUERRIERO_CURATO="%s e' stato curato di %d punti ferita.\nOra la sua salute ammonta a %.2f punti ferita.\n";	
-	public static final String ORCO = "Hai trovato un Orco\n";
 	private static final String COMBATTI_ORCO = "Vuoi combattere? ";
 	private static final String REPORT_COMBATTIMENTO = "Nel combattimento %s ha subito %.2f danni.\n";
 	private static final String PUNTI_VITA = "Ora il tuo guerriero ha %.2f punti vita.\n";
@@ -63,7 +64,7 @@ public class Visualizzatore {
 	}
 
 	public static Boolean scegliCombattiOrco() {
-		System.out.printf(ORCO);
+		System.out.println(ORCO_TROVATO);
 		return InputDati.yesOrNo(COMBATTI_ORCO);				
 	}
 	
