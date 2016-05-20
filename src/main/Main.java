@@ -12,6 +12,7 @@ public class Main {
 
 	private static void benvenuto() {
 		Visualizzatore.printBenvenuto();
+		
 	}
 	
 	private static void arrivederci() {

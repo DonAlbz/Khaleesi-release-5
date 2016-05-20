@@ -13,6 +13,10 @@ public class Visualizzatore {
 	public final static String POZIONE="Pozione";
 	public final static String FORZIERE="Forziere";
 	public static final String ORCO = "Orco";
+	public static final String MONETE = "Monete";
+	public static final String NESSUNA = "Nessuna";
+	
+
 	private final static String OGGETTO_TROVATO="Hai trovato l'oggetto: %s.\n";
 	private static final String ORCO_TROVATO="Hai trovato un Orco!";
 	private final static String RACCOGLIERE="Lo vuoi raccogliere?";
