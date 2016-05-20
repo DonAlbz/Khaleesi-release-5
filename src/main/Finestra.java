@@ -14,6 +14,10 @@ public class Finestra implements Observer {
 	private JFrame mainFrame;
 	private JLabel nomeLabel;
 	private JLabel nomeInseritoLabel;
+	private JLabel categoriaDesLabel;
+	private JLabel categoriaLabel;
+	private JLabel expDesLabel;
+	private JLabel expLabel;
 	private JLabel hpDesLabel;
 	private JLabel hpLabel;
 	private JLabel armaDesLabel;
@@ -22,10 +26,13 @@ public class Finestra implements Observer {
 	private JLabel moneteLabel;
 	private JLabel contenutoCasellaDesLabel;
 	private JLabel contenutoCasellaLabel;
-	
-	private Panel controlPanel;
 	private JLabel livelloDesLabel;
 	private JLabel livelloLabel;
+	private JLabel grazieLabel;
+	private JLabel theShandonAdventureLabel;
+	
+	private Panel controlPanel;
+	
 	
 
 	public Finestra(Partita partita){
@@ -40,7 +47,7 @@ public class Finestra implements Observer {
 		mainFrame = new JFrame("Scheda di gioco");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		mainFrame.setSize(400,400);
-		mainFrame.setLayout(new GridLayout(6, 2));
+		mainFrame.setLayout(new GridLayout(8, 2));
 		mainFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent){
 				System.exit(0);
@@ -62,6 +69,17 @@ public class Finestra implements Observer {
 		livelloLabel = new JLabel();        
 		livelloLabel.setHorizontalAlignment(JLabel.CENTER);
 		
+		categoriaDesLabel = new JLabel();        
+		categoriaDesLabel.setHorizontalAlignment(JLabel.RIGHT);
+		categoriaLabel = new JLabel();        
+		categoriaLabel.setHorizontalAlignment(JLabel.CENTER);
+		
+		expDesLabel = new JLabel();        
+		expDesLabel.setHorizontalAlignment(JLabel.RIGHT);
+		expLabel = new JLabel();        
+		expLabel.setHorizontalAlignment(JLabel.CENTER);
+		
+		
 		hpDesLabel = new JLabel();
 		hpDesLabel.setHorizontalAlignment(JLabel.RIGHT);
 		hpLabel = new JLabel();        
@@ -79,12 +97,24 @@ public class Finestra implements Observer {
 		contenutoCasellaDesLabel.setHorizontalAlignment(JLabel.RIGHT);
 		contenutoCasellaLabel = new JLabel();        
 		contenutoCasellaLabel.setHorizontalAlignment(JLabel.CENTER);
+		
+		grazieLabel = new JLabel();
+		grazieLabel.setHorizontalAlignment(JLabel.CENTER);
+		theShandonAdventureLabel = new JLabel();
+		theShandonAdventureLabel.setHorizontalAlignment(JLabel.CENTER);		
+		theShandonAdventureLabel.setVerticalAlignment(JLabel.TOP);		
 	
 		mainFrame.add(nomeLabel);
 		mainFrame.add(nomeInseritoLabel);
 		
+		mainFrame.add(categoriaDesLabel);
+		mainFrame.add(categoriaLabel);
+		
 		mainFrame.add(livelloDesLabel);
 		mainFrame.add(livelloLabel);
+		
+		mainFrame.add(expDesLabel);
+		mainFrame.add(expLabel);
 		
 		mainFrame.add(hpDesLabel);
 		mainFrame.add(hpLabel);
@@ -103,18 +133,36 @@ public class Finestra implements Observer {
 	private void inserisciDatiIniziali(Partita partita){
 		nomeLabel.setText("Nome guerriero:"); 
 		nomeInseritoLabel.setText(partita.getGuerriero().getNome());
+		categoriaDesLabel.setText("Categoria:"); 
+		categoriaLabel.setText(partita.getGuerriero().getCategoria());		
 		livelloDesLabel.setText("Livello:"); 
-		livelloLabel.setText(Integer.toString(partita.getGuerriero().getLivello()));
+		expDesLabel.setText("Esperienza:"); 
 		hpDesLabel.setText("Punti vita:"); 
-		hpLabel.setText(Double.toString(partita.getGuerriero().getPuntiVita()));
 		armaDesLabel.setText("Arma impugnata:"); 
 		moneteDesLabel.setText(Visualizzatore.MONETE);
-		moneteLabel.setText(Integer.toString(partita.getGuerriero().getMonete()));
-		contenutoCasellaDesLabel.setText("Contenuto casella corrente:"); 
-		contenutoCasellaLabel.setText(partita.contenutoCasellaToString(partita.getGuerriero().getPosizione()));
-
+		contenutoCasellaDesLabel.setText("Contenuto casella corrente:");
+		grazieLabel.setFont(new Font("Serif",Font.ROMAN_BASELINE,20));
+		grazieLabel.setText("Grazie per aver giocato a");
+		theShandonAdventureLabel.setFont(new Font("Serif",Font.BOLD,35));
+		theShandonAdventureLabel.setText("The Shandon Adventure");
 		mainFrame.setVisible(true);  
 	} 
+	
+	public void arrivederci(){
+		mainFrame.getContentPane().removeAll();
+		mainFrame.setLayout(new GridLayout(2, 1));
+		mainFrame.add(grazieLabel);
+		mainFrame.add(theShandonAdventureLabel);	
+		mainFrame.revalidate();
+		mainFrame.repaint();
+		try {
+			Thread.sleep(4000);
+			mainFrame.dispatchEvent(new WindowEvent(mainFrame, WindowEvent.WINDOW_CLOSING));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	private void setContenutoCasella(String s){
 		contenutoCasellaLabel.setText(s);
@@ -136,6 +184,10 @@ public class Finestra implements Observer {
 		moneteLabel.setText(Integer.toString(m));
 	}
 	
+	private void setExp(int e){
+		expLabel.setText(Integer.toString(e));
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		Partita partita=(Partita)arg;
@@ -148,7 +200,8 @@ public class Finestra implements Observer {
 		catch(NullPointerException e){
 			setArma(Visualizzatore.NESSUNA);			
 		}
-		setLivello(partita.getGuerriero().getLivello());		
+		setLivello(partita.getGuerriero().getLivello());
+		setExp(partita.getGuerriero().getPuntiEsperienza());
 	}
 }
 

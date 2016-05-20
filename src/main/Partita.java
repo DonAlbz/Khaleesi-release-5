@@ -49,7 +49,6 @@ public class Partita extends Observable {
 	}
 
 	public void start() {
-		System.out.println(guerriero.getCategoria());
 		richiediSpostamento();
 		this.setChanged();
 		this.notifyObservers(this);
@@ -65,7 +64,7 @@ public class Partita extends Observable {
 			this.notifyObservers(this);
 			this.clearChanged();
 		}
-		//System.out.println(casella);//Stampa la mappa
+		finestra.arrivederci();
 	}
 
 	/**Permette all'utente di decidere la direzione di spostamento del {@link #guerriero}

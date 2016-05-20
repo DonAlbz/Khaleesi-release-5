@@ -52,7 +52,6 @@ public abstract class AbstractStato implements Stato {
 	
 	private void fugaOrco (Orco orco) {
 		double casuale=estraiPobalitaFuga();
-		System.out.println(casuale);
 		if(casuale>=Parametri.probFuga)
 			Visualizzatore.fugaRiuscita(true);
 		else{
